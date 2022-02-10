@@ -18,8 +18,8 @@ class Crtsh:
             self.__output_log = f'{domain}_subdomains.log'
 
     def __scrapper(self):
-        print(f'Scrapping: {self.CRTSH_URL}?CN=%25.devoteam.com')
-        response = requests.get(f'{self.CRTSH_URL}?CN=%25.devoteam.com')
+        print(f'Scrapping: {self.CRTSH_URL}?CN=%25.{self.__domain}')
+        response = requests.get(f'{self.CRTSH_URL}?CN=%25.{self.__domain}')
         tree = html.fromstring(response.content)
         sub_domain = tree.xpath(
             f'//td[contains(text(),"{self.__domain}")]/text()'
