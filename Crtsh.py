@@ -29,7 +29,8 @@ class Crtsh:
                     email_logged.append(email)
 
                     expired = self.__date_before_now(crt['not_after'])
-                    treated_data.append({"email": email, "not_after": crt['not_after'], "expired": expired})
+                    treated_data.append({"email": email, "record": crt['entry_timestamp'].split('.')[0],
+                                         "not_after": crt['not_after'], "expired": expired})
 
         return treated_data
 
@@ -68,7 +69,7 @@ class Crtsh:
     @staticmethod
     def __log_by_category(file, results):
         for result in results:
-            file.write(f'Email: {result["email"]}, Not_After: {result["not_after"]}, '
+            file.write(f'Email: {result["email"]}, Record: {result["record"]}, Not_After: {result["not_after"]}, '
                        f'Expired: {result["expired"]}\n')
 
     def __log(self, new_subdomains, expired_subdomains, updated_subdomains):
